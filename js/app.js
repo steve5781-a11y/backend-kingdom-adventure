@@ -35,6 +35,9 @@
   const chById = (id) => CH.find((c) => c.id === id);
   const VOCAB = CH.flatMap((c) => c.vocab.map((v, i) => ({ ...v, id: `${c.id}-v${i}`, ch: c.id })));
 
+  // 게임 중 포즈가 바뀔 때 깜빡이지 않도록 일러스트 미리 불러오기
+  ['prince', 'prince-hurt', 'prince-attack', 'princess', 'darklord', 'wizard'].forEach((n) => { new Image().src = `img/${n}.webp`; });
+
   // ---------- 효과음 ----------
   const Sfx = {
     ctx: null,
@@ -193,7 +196,7 @@
         <div class="hb-text">
           <span class="tag">백엔드 필수 개념 · ${CH.length}챕터</span>
           <h1>백엔드 왕국<br><em>대모험</em></h1>
-          <p>버그킹 드래곤이 공주를 납치했다! 🐉<br>
+          <p>암흑군주 버그킹이 공주를 납치했다! 😈<br>
           만화로 개념을 익히고, 단어를 외우고,<br>퀴즈로 버그 몬스터를 물리쳐 공주를 구하라!</p>
           <div class="btns">
             <a class="btn primary" href="#/learn${next ? '/' + next.id : ''}">📖 ${next && read.length ? '이어서 공부하기' : '만화로 공부 시작'}</a>
@@ -223,7 +226,7 @@
       <section class="features">
         <a class="feature" href="#/learn" style="--c:var(--blue)">
           <div class="f-icon">📖</div><h3>만화로 배우기</h3>
-          <p>백둥이 기사와 서버 마법사가 대화로 풀어주는 ${CH.length}개 챕터 만화</p>
+          <p>백둥이 왕자와 서버 마법사가 대화로 풀어주는 ${CH.length}개 챕터 만화</p>
         </a>
         <a class="feature" href="#/vocab" style="--c:var(--green)">
           <div class="f-icon">🃏</div><h3>단어 카드</h3>
@@ -573,7 +576,7 @@
         <div class="qi-text">
           <span class="tag red">QUEST</span>
           <h1>공주 구출 대작전</h1>
-          <p>버그 몬스터를 퀴즈로 물리치며 성까지 <b>${GOAL}칸</b>을 전진하세요!<br>마지막 칸에는 보스 <b>버그킹 드래곤</b>이 기다립니다.</p>
+          <p>버그 몬스터를 퀴즈로 물리치며 성까지 <b>${GOAL}칸</b>을 전진하세요!<br>마지막 칸에는 보스 <b>암흑군주 버그킹</b>이 기다립니다.</p>
           <ul class="rules">
             <li>⭕ 정답 → 몬스터 처치 & <b>한 칸 전진</b></li>
             <li>❌ 오답 → <b>하트 -1</b>, 그 문제는 잠시 후 다시 등장</li>
@@ -666,7 +669,7 @@
     nextQuestion();
   }
 
-  const posOf = (s) => 2 + s * (56 / G.goal);
+  const posOf = (s) => 2 + s * (50 / G.goal);
 
   function renderPlay() {
     const marks = Array.from({ length: G.goal }, (_, s) => `<i class="stone" style="left:${posOf(s) + 5}%"></i>`).join('');
@@ -729,11 +732,11 @@
   function spawnMonster() {
     const boss = G.step === G.goal - 1 && G.goal >= 3;
     const pick = window.MONSTER_NAMES[(Math.random() * window.MONSTER_NAMES.length) | 0];
-    G.monster = boss ? { name: '👑 보스: 버그킹 드래곤', boss: true } : { name: pick[0], color: pick[1] };
+    G.monster = boss ? { name: '👑 보스: 암흑군주 버그킹', boss: true } : { name: pick[0], color: pick[1] };
     G.monsterAlive = true;
     const m = $('#monster');
     m.className = 'actor monster spawn' + (boss ? ' boss' : '');
-    m.style.left = `${posOf(G.step) + 14}%`;
+    m.style.left = `${posOf(G.step) + 17}%`;
     $('#mName').textContent = G.monster.name;
     $('#mBody').innerHTML = boss ? Art.char('dragon', 'angry') : Art.char('monster', 'angry', { color: G.monster.color });
     if (boss) popFx('BOSS 등장!', 50, 30, 'boss-fx');
@@ -820,7 +823,7 @@
       G.monsterAlive = false;
       if (G.cfg.mode === 'revenge') removeWrong(q.id);
       Sfx.play('good');
-      hero.querySelector('svg').outerHTML = Art.char('hero', 'happy');
+      hero.querySelector('.char').outerHTML = Art.char('hero', 'attack');
       replay(hero, 'attack');
       setTimeout(() => {
         popFx(G.monster.boss ? '크아악!' : ['슉!', '쾅!', '처치!', '베었다!'][(Math.random() * 4) | 0], posOf(G.step - 1) + 15, 22);
@@ -838,7 +841,7 @@
       Sfx.play('bad');
       replay(mon, 'lunge');
       setTimeout(() => {
-        hero.querySelector('svg').outerHTML = Art.char('hero', G.hearts > 0 ? 'sad' : 'surprised');
+        hero.querySelector('.char').outerHTML = Art.char('hero', 'sad');
         replay(hero, 'hurt');
         replay($('#scene'), 'shake');
         popFx('-❤️', posOf(G.step) + 4, 14, 'dmg-fx');
@@ -868,7 +871,7 @@
     if (!G || G.over) return;
     const hero = $('#hero');
     if (G.hearts <= 0) return endGame(false);
-    hero.querySelector('svg').outerHTML = Art.char('hero', 'normal');
+    hero.querySelector('.char').outerHTML = Art.char('hero', 'normal');
     if (G.step >= G.goal) return winSequence();
     if (!G.monsterAlive) {
       hero.style.left = `${posOf(G.step)}%`;
@@ -893,7 +896,7 @@
       p.classList.add('saved');
       $('#helpBubble').textContent = '고마워요!';
       $('#helpBubble').classList.remove('think');
-      hero.querySelector('svg').outerHTML = Art.char('hero', 'happy');
+      hero.querySelector('.char').outerHTML = Art.char('hero', 'happy');
       replay(hero, 'jump');
       confetti();
       Sfx.play('win');
@@ -905,7 +908,7 @@
   function endGame(win) {
     G.over = true;
     const hero = $('#hero');
-    hero.querySelector('svg').outerHTML = Art.char('hero', 'sad');
+    hero.querySelector('.char').outerHTML = Art.char('hero', 'sad');
     hero.classList.add('fallen');
     popFx(G.monster.boss ? '크하하하!' : '키키킥!', posOf(G.step) + 16, 18, 'dmg-fx');
     Sfx.play('lose');
@@ -931,8 +934,8 @@
         <div class="r-body">
           <h2>${win ? '🎉 공주 구출 성공!' : '💀 GAME OVER'}</h2>
           <p class="r-quote">${win
-            ? '“고마워요, 백엔드 기사님! 당신의 지식이 왕국을 구했어요!”'
-            : '“크하하! 공부를 더 하고 와라, 꼬마 기사!” — 버그킹 드래곤'}</p>
+            ? '“고마워요, 백엔드 왕자님! 당신의 지식이 왕국을 구했어요!”'
+            : '“크하하! 공부를 더 하고 와라, 꼬마 왕자!” — 암흑군주 버그킹'}</p>
           <div class="r-stats">
             <div><b>${G.score}</b><span>점수</span></div>
             <div><b>${rate}%</b><span>정답률</span></div>

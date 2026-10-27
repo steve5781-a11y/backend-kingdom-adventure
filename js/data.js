@@ -4,7 +4,7 @@
  * - vocab:  단어 카드 (t: 용어, m: 뜻, ex: 예시)
  * - quiz:   퀴즈 (o[0]이 정답, 출제 시 섞임)
  *
- * 캐릭터: hero(백둥이 기사) mentor(서버 마법사) server db client cache lb queue container princess monster dragon
+ * 캐릭터: hero(백둥이 왕자) mentor(서버 마법사) server db client cache lb queue container princess monster dragon(암흑군주)
  * 표정:   normal happy surprised sad think angry
  * 배경:   sky castle server room alert night
  */

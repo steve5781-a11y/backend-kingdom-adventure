@@ -130,6 +130,12 @@ code {
 .bubble.small { font-size: .85rem; padding: 5px 10px; border-width: 2.5px; }
 .bubble.think { border-style: dashed; }
 
+/* 일러스트 캐릭터 (왕자·공주·마법사·암흑군주) */
+img.char {
+  object-fit: contain; object-position: 50% 100%; user-select: none; -webkit-user-drag: none;
+  filter: drop-shadow(2px 3px 0 rgba(27, 27, 47, .22));
+}
+
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity .5s ease, transform .5s ease; }
 .reveal.in { opacity: 1; transform: none; }
 
@@ -263,6 +269,8 @@ code {
 .char-wrap { position: relative; display: flex; flex-direction: column; align-items: center; }
 .char-wrap .char { width: 118px; height: 138px; display: block; }
 .n3 .char-wrap .char { width: 92px; height: 108px; }
+.char-wrap .img-char { width: 150px; height: 172px; }
+.n3 .char-wrap .img-char { width: 110px; height: 130px; }
 .nametag {
   margin-top: -4px; background: var(--ink); color: #fff; font-family: var(--f-fun);
   font-size: .78rem; padding: 0 8px; border-radius: 6px; white-space: nowrap; position: relative; z-index: 2;
@@ -283,7 +291,7 @@ code {
   display: flex; gap: 20px; align-items: center; margin-top: 28px; padding: 20px 24px;
   background: #fffbe0; border: var(--line); border-radius: var(--radius); box-shadow: var(--shadow);
 }
-.summary-mentor .char { width: 110px; height: 128px; }
+.summary-mentor .char { width: 120px; height: 170px; }
 .summary h2, .ch-vocab h2 { font-family: var(--f-fun); font-weight: 400; margin: 0 0 6px; }
 .summary ul { margin: 0; padding-left: 1.2em; }
 .summary li { margin: 3px 0; }
@@ -362,7 +370,7 @@ code {
   background: linear-gradient(135deg, #3b2a63, #7b4fc9 60%, #ff7bb0); color: #fff;
 }
 .qi-art { display: flex; align-items: center; justify-content: center; }
-.qi-art .char { width: 42%; height: auto; filter: drop-shadow(3px 3px 0 rgba(0, 0, 0, .3)); }
+.qi-art .char { width: auto; max-width: 46%; height: clamp(150px, 22vw, 240px); filter: drop-shadow(3px 3px 0 rgba(0, 0, 0, .3)); }
 .qi-art .char-hero { animation: bob 1.2s ease-in-out infinite; }
 .qi-art .char-dragon { animation: bob 1.5s ease-in-out infinite .4s; }
 .vs { font-family: var(--f-title); font-size: 2.4rem; color: var(--yellow); -webkit-text-stroke: 2px var(--ink); paint-order: stroke fill; transform: rotate(-8deg); }
@@ -434,13 +442,15 @@ code {
 .princess-peek .char { width: 100%; height: auto; display: block; }
 .princess-peek.saved { left: -30%; top: 45%; width: 58%; animation: jump .6s ease-in-out 3 .8s; }
 
-.actor { position: absolute; bottom: 11%; width: clamp(62px, 13%, 120px); transition: left .75s ease-in-out; z-index: 3; }
-.actor .char { width: 100%; height: auto; display: block; }
+.actor { position: absolute; bottom: 11%; height: clamp(84px, 15vw, 150px); transition: left .75s ease-in-out; z-index: 3; }
+.actor .char { height: 100%; width: auto; display: block; }
+.monster .m-body { height: 100%; }
+.monster svg.char { aspect-ratio: 120 / 140; }
 .hero.walk .char { animation: walkBob .18s ease-in-out 4 alternate; }
 .hero.attack { animation: attack .45s ease-out; }
 .hero.hurt { animation: hurt .5s ease-out; }
 .hero.jump { animation: jump .5s ease-in-out 3; }
-.hero.fallen .char { transform: rotate(-90deg) translateX(-20%); filter: grayscale(.8); transition: transform .5s; }
+.hero.fallen .char { transform: rotate(-80deg) translateX(-25%); transform-origin: 50% 90%; filter: grayscale(.8); transition: transform .5s; }
 
 .monster .m-body { animation: squish 1s ease-in-out infinite alternate; transform-origin: 50% 100%; }
 .monster .m-name {
@@ -448,7 +458,7 @@ code {
   background: #fff; border: 2px solid var(--ink); border-radius: 8px; padding: 0 8px;
   font-family: var(--f-fun); font-size: .78rem; white-space: nowrap;
 }
-.monster.boss { width: clamp(80px, 17%, 150px); }
+.monster.boss { height: clamp(100px, 18vw, 180px); }
 .monster.boss .m-name { background: var(--red); color: #fff; }
 .monster.spawn { animation: spawn .45s cubic-bezier(.3, 1.6, .5, 1); }
 .monster.lunge { animation: lunge .45s ease-in-out; }
@@ -590,7 +600,7 @@ code {
   .stats { grid-template-columns: repeat(2, 1fr); }
   .comic-page { grid-template-columns: 1fr; padding: 12px; }
   .quest-intro { grid-template-columns: 1fr; }
-  .qi-art .char { width: 36%; max-width: 160px; }
+  .qi-art .char { height: 170px; }
   .vocab-main { grid-template-columns: 1fr; }
   .mentor-tip { flex-direction: row; gap: 10px; align-items: center; }
   .mentor-tip .char { width: 70px; height: 82px; order: -1; }
@@ -613,6 +623,8 @@ code {
   .art { min-height: 270px; padding: 44px 6px 12px; }
   .char-wrap .char { width: 96px; height: 112px; }
   .n3 .char-wrap .char { width: 76px; height: 90px; }
+  .char-wrap .img-char { width: 120px; height: 140px; }
+  .n3 .char-wrap .img-char { width: 90px; height: 110px; }
   .slot .bubble { font-size: .88rem; padding: 6px 8px; }
   .n1 .slot .bubble { font-size: 1rem; max-width: 90%; }
   .fx { font-size: 1.4rem; }

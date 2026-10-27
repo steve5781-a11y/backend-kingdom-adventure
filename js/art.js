@@ -39,36 +39,6 @@
     `<rect x="42" y="${y}" width="12" height="18" rx="4" fill="${c}"/><rect x="66" y="${y}" width="12" height="18" rx="4" fill="${c}"/>`;
 
   const parts = {
-    hero: (e) => `
-      <path d="M34 82 Q18 112 30 124 L90 124 Q102 112 86 82 Z" fill="#e74c3c"/>
-      <rect x="43" y="114" width="12" height="16" rx="4" fill="#3d3d5c"/><rect x="65" y="114" width="12" height="16" rx="4" fill="#3d3d5c"/>
-      <rect x="39" y="126" width="18" height="9" rx="4" fill="#7a4a24"/><rect x="63" y="126" width="18" height="9" rx="4" fill="#7a4a24"/>
-      <path d="M37 120 Q35 84 60 81 Q85 84 83 120 Z" fill="#3a86ff"/>
-      <rect x="37" y="106" width="46" height="7" fill="#ffd23f"/>
-      <text x="60" y="101" font-size="13" font-weight="900" text-anchor="middle" fill="#fff" stroke="none" font-family="monospace">&lt;/&gt;</text>
-      <path d="M40 92 Q30 100 32 110" fill="none"/><circle cx="32" cy="112" r="6" fill="${SKIN}"/>
-      <rect x="96" y="56" width="8" height="46" rx="2" fill="#e8eef5"/><path d="M96 58 l4 -8 l4 8z" fill="#e8eef5"/>
-      <rect x="89" y="100" width="22" height="6" rx="2" fill="#a0632c"/><rect x="97" y="106" width="6" height="11" fill="#5b3a1e"/>
-      <path d="M80 92 Q92 98 96 108" fill="none"/><circle cx="99" cy="110" r="6" fill="${SKIN}"/>
-      <circle cx="60" cy="54" r="28" fill="${SKIN}"/>
-      <path d="M31 53 Q30 22 60 22 Q90 22 89 53 Q82 40 60 40 Q38 40 31 53Z" fill="#c8d2de"/>
-      <path d="M58 23 Q62 3 84 7 Q72 12 68 24Z" fill="#ff5c5c"/>
-      ${at(60, 60, e)}`,
-
-    mentor: (e) => `
-      <path d="M104 132 L104 40" stroke="#7a4a24" stroke-width="6" stroke-linecap="round"/>
-      <path d="M104 132 L104 40" fill="none"/>
-      <circle cx="104" cy="34" r="9" fill="#6ef0ff"/><circle cx="101" cy="31" r="3" fill="#fff" stroke="none"/>
-      <path d="M28 136 Q32 84 60 80 Q88 84 92 136Z" fill="#7b4fc9"/>
-      <circle cx="44" cy="112" r="2.5" fill="#ffd23f" stroke="none"/><circle cx="74" cy="122" r="2.5" fill="#ffd23f" stroke="none"/><circle cx="64" cy="100" r="2" fill="#ffd23f" stroke="none"/>
-      <path d="M86 98 Q96 100 100 92" fill="none"/><circle cx="101" cy="90" r="6" fill="${SKIN}"/>
-      <circle cx="60" cy="62" r="24" fill="${SKIN}"/>
-      <path d="M37 66 Q38 106 60 112 Q82 106 83 66 Q74 78 60 77 Q46 78 37 66Z" fill="#fff"/>
-      ${at(60, 62, e, .95)}
-      <path d="M26 52 Q60 38 94 52 Q86 57 60 53 Q34 57 26 52Z" fill="#5a33a6"/>
-      <path d="M38 50 Q50 32 52 6 Q70 22 84 50 Q60 44 38 50Z" fill="#7b4fc9"/>
-      <path d="M62 30 l2 5 5 .5 -4 3.5 1.5 5 -4.5 -3 -4.5 3 1.5 -5 -4 -3.5 5 -.5z" fill="#ffd23f" stroke-width="1.5"/>`,
-
     server: (e) => `
       ${legs(118, '#2d3e50')}
       <path d="M26 82 Q12 88 14 104" fill="none"/><circle cx="14" cy="106" r="5.5" fill="#bdc3c7"/>
@@ -140,16 +110,6 @@
       <rect x="38" y="56" width="44" height="38" rx="9" fill="#e8f4fd"/>
       ${at(60, 75, e, .8)}`,
 
-    princess: (e) => `
-      <path d="M30 136 Q38 88 60 82 Q82 88 90 136Z" fill="#ff8fc8"/>
-      <path d="M44 100 Q60 108 76 100" fill="none" stroke-width="2"/>
-      <path d="M31 64 Q28 100 40 108 L80 108 Q92 100 89 64 Q90 30 60 30 Q30 30 31 64Z" fill="#ffd54f"/>
-      <circle cx="60" cy="62" r="24" fill="${SKIN}"/>
-      <path d="M36 58 Q40 36 60 36 Q80 36 84 58 Q72 46 60 50 Q48 46 36 58Z" fill="#ffd54f"/>
-      <path d="M44 36 L46 18 L53 27 L60 13 L67 27 L74 18 L76 36Z" fill="#ffd23f"/>
-      <circle cx="60" cy="28" r="3" fill="#ff5c5c" stroke-width="1.5"/>
-      ${at(60, 66, e, .9)}`,
-
     monster: (e, o) => `
       <path d="M46 60 Q36 36 28 32" fill="none"/><circle cx="27" cy="31" r="5.5" fill="${o.color}"/>
       <path d="M74 60 Q84 36 92 32" fill="none"/><circle cx="93" cy="31" r="5.5" fill="${o.color}"/>
@@ -157,24 +117,24 @@
       <ellipse cx="38" cy="82" rx="6" ry="11" fill="#fff" opacity=".55" stroke="none"/>
       ${at(60, 94, e || 'angry', 1)}`,
 
-    dragon: (e) => `
-      <path d="M32 78 L0 30 L16 66 L-2 62 L26 98Z" fill="#8e44ad"/>
-      <path d="M88 78 L120 30 L104 66 L122 62 L94 98Z" fill="#8e44ad"/>
-      <path d="M86 116 Q112 118 116 98 Q108 110 92 106" fill="#c0392b"/>
-      <ellipse cx="60" cy="106" rx="36" ry="28" fill="#c0392b"/>
-      <ellipse cx="60" cy="112" rx="20" ry="17" fill="#f5cba7"/>
-      <path d="M38 132 h12 M70 132 h12" fill="none" stroke-width="6"/>
-      <path d="M40 36 L30 8 L50 30Z" fill="#f5f5f5"/><path d="M80 36 L90 8 L70 30Z" fill="#f5f5f5"/>
-      <ellipse cx="60" cy="56" rx="31" ry="27" fill="#e74c3c"/>
-      <path d="M48 32 L50 20 L55 27 L60 16 L65 27 L70 20 L72 32Z" fill="#ffd23f"/>
-      <circle cx="52" cy="76" r="2" fill="${K}"/><circle cx="68" cy="76" r="2" fill="${K}"/>
-      ${at(60, 56, e || 'angry', 1.05)}`,
   };
 
+  // 직접 그린 일러스트가 있는 캐릭터 (img/ 폴더)
+  const IMAGES = {
+    hero: (e) => (e === 'attack' || e === 'angry' ? 'prince-attack' : e === 'sad' ? 'prince-hurt' : 'prince'),
+    mentor: () => 'wizard',
+    princess: () => 'princess',
+    dragon: () => 'darklord',
+  };
+  const ALT = { hero: '백둥이 왕자', mentor: '서버 마법사', princess: '공주', dragon: '암흑군주 버그킹' };
+
   function char(type, e = 'normal', o = {}) {
-    const draw = parts[type] || parts.hero;
-    const vb = type === 'dragon' ? '-4 0 128 140' : '0 0 120 140';
-    return `<svg class="char char-${type}" viewBox="${vb}" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    if (IMAGES[type]) {
+      const name = IMAGES[type](e);
+      return `<img class="char char-${type} img-char pose-${name}" src="img/${name}.webp" alt="${ALT[type]}" draggable="false">`;
+    }
+    const draw = parts[type] || parts.server;
+    return `<svg class="char char-${type}" viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <g ${line}>${draw(e, o)}</g></svg>`;
   }
 
